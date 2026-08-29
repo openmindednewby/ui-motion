@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.0.2
+
+### Fixed
+
+- **`Collapse` — a closed region is now HIDDEN, not merely clipped.** `overflow: hidden` +
+  `height: 0` clips, but the clipped child keeps its own non-empty box: it stayed in the tab
+  order, was still announced by screen readers, and was still reported VISIBLE by Playwright —
+  while the owning header said `aria-expanded="false"`. Found by an aml-v2 E2E test that could
+  see a collapsed settings panel. A settled-closed region now sets `visibility: hidden` (web),
+  `aria-hidden`, `accessibilityElementsHidden`, `importantForAccessibility="no-hide-descendants"`
+  and `pointerEvents="none"`.
+
+  `visibility: hidden` rather than `display: none` deliberately: `display: none` would zero the
+  `onLayout` measurement the component animates back to, so reopening would animate 0 -> 0.
+
+  "Settled closed" is a state distinct from `!open` — it is set only once the collapse has
+  actually finished, so the content collapses instead of vanishing, and an interrupted collapse
+  (a reopen mid-animation, `finished: false`) never hides. It is also set immediately whenever
+  there is nothing to animate: before the first `onLayout` and under reduced motion.
+
+- **`collapseSettlesClosed(open, finished)`** exported from `motionUtils` — the settle rule as a
+  pure function, because the animation callback it guards is unreachable from a jsdom test
+  (`onLayout` needs a `ResizeObserver`).
+
+
 ## 1.0.1
 
 Initial release — the shared motion layer of the dloizides.com RN-web UI kit.

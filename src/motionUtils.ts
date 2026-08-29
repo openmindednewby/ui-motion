@@ -41,6 +41,23 @@ export function collapseTargetHeight(open: boolean, measured: number | null): nu
 }
 
 /**
+ * Whether a finished collapse animation leaves the region SETTLED CLOSED — the state in which the
+ * content is taken out of the accessibility tree, the tab order and hit-testing.
+ *
+ * Both halves matter. `!open` alone is true from the animation's FIRST frame, so hiding on it would
+ * make the content vanish instead of collapse. `finished` alone is true for a completed EXPAND. And
+ * `finished` is false when a reopen interrupted the collapse, where hiding would hide an element
+ * that is already on its way back open.
+ *
+ * This lives here, and not inline in the animation callback, because that callback is unreachable
+ * from a jsdom test: `onLayout` needs a `ResizeObserver`, so `Collapse` never measures and never
+ * animates there. A test asserting the rule through the DOM would be asserting nothing.
+ */
+export function collapseSettlesClosed(open: boolean, finished: boolean): boolean {
+  return finished && !open;
+}
+
+/**
  * The scale a {@link PressableScale} should animate to. `1` (no scale) whenever
  * reduced-motion is on OR the control is not pressed; the pressed scale otherwise.
  */

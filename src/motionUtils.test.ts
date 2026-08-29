@@ -1,9 +1,10 @@
 import {
-  resolveDuration,
-  shouldUseNativeDriver,
+  collapseSettlesClosed,
   collapseTargetHeight,
+  resolveDuration,
   resolveScale,
   shimmerRange,
+  shouldUseNativeDriver,
 } from './motionUtils';
 import { motionDurations } from './motionTokens';
 
@@ -68,5 +69,23 @@ describe('shimmerRange', () => {
   it('sweeps from just off the left to just off the right', () => {
     expect(shimmerRange(200)).toEqual([-200, 200]);
     expect(shimmerRange(0)).toEqual([-0, 0]);
+  });
+});
+
+describe('collapseSettlesClosed', () => {
+  it('settles only when a CLOSE actually completed', () => {
+    expect(collapseSettlesClosed(false, true)).toBe(true);
+  });
+
+  it('does not settle when a reopen interrupted the collapse', () => {
+    // `finished: false` means something took the animation over — hiding here would hide an
+    // element that is already on its way back open.
+    expect(collapseSettlesClosed(false, false)).toBe(false);
+  });
+
+  it('never settles an OPEN region, finished or not', () => {
+    // A completed EXPAND also reports `finished: true`; `open` is what separates the two.
+    expect(collapseSettlesClosed(true, true)).toBe(false);
+    expect(collapseSettlesClosed(true, false)).toBe(false);
   });
 });
