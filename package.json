@@ -1,6 +1,6 @@
 {
     "name": "@dloizides/ui-motion",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "description": "Themable, brand-agnostic React Native (RN-web) motion primitives — useEnterExit, FadeIn, Collapse, PressableScale, Skeleton — built on RN Animated, driven by @dloizides/design-tokens motion tokens, and gated on @dloizides/rn-web-hooks useReducedMotion (every animation collapses to instant under reduced-motion). Part of the dloizides.com shared UI kit.",
     "keywords": [
         "react",
