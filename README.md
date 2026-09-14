@@ -50,6 +50,12 @@ if (!mounted) return null;
 return <Animated.View style={style}>{children}</Animated.View>;
 ```
 
+### `useFocusLift(focused, spring, { scale?, lift? })`
+
+Springs a tile to `scale` (default 1.06) and `-lift` px (default 8) while `focused`, back to rest
+otherwise. A focus change retargets the running spring. Reduced motion: no movement (signal focus
+with a ring/shadow instead). Spread `style` onto an `Animated.View`. Pure target: `focusLiftTarget`.
+
 ## Components
 
 ### `<FadeIn duration? delay? translateY? style? testID>`
@@ -90,6 +96,12 @@ loading signal than the opacity pulse in `ui-feedback`'s PageSkeleton.
 ```tsx
 <Skeleton width="60%" height={20} borderRadius={6} />
 ```
+
+### `<Reorder itemKeys spring staggerMs? cap? testID>{(key) => node}</Reorder>`
+
+FLIP re-rank for a keyed list: when `itemKeys` changes order, moved items spring from their old
+slot to the new one, staggered (default 18ms), at most `cap` (default 8) animated. Under reduced
+motion items jump. The invert maths is the pure `computeFlipDeltas`.
 
 ## Reduced motion
 

@@ -35,11 +35,27 @@ export {
   DEFAULT_PRESSED_SCALE,
   DEFAULT_FADE_TRANSLATE_Y,
   DEFAULT_SKELETON_DURATION_MS,
+  DEFAULT_FOCUS_SCALE,
+  DEFAULT_FOCUS_LIFT_PX,
+  DEFAULT_FLIP_STAGGER_MS,
+  DEFAULT_FLIP_CAP,
 } from './constants';
 
 // Hooks.
 export { useEnterExit } from './hooks/useEnterExit';
 export type { UseEnterExitOptions, UseEnterExitResult } from './hooks/useEnterExit';
+
+export { useFocusLift, focusLiftTarget } from './hooks/useFocusLift';
+export type {
+  FocusLiftSpring,
+  FocusLiftOptions,
+  FocusLiftTarget,
+  UseFocusLiftResult,
+} from './hooks/useFocusLift';
+
+// FLIP reorder (pure invert step + the component that plays it).
+export { computeFlipDeltas } from './flip/computeFlipDeltas';
+export type { LayoutBox, FlipDelta, FlipOptions } from './flip/computeFlipDeltas';
 
 // Components.
 export { FadeIn } from './FadeIn/FadeIn';
@@ -53,3 +69,6 @@ export type { PressableScaleProps } from './PressableScale/PressableScale';
 
 export { Skeleton } from './Skeleton/Skeleton';
 export type { SkeletonProps } from './Skeleton/Skeleton';
+
+export { Reorder } from './flip/Reorder';
+export type { ReorderProps } from './flip/Reorder';

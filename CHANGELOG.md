@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.0
+
+### Added
+
+- **`computeFlipDeltas(prev, next, { staggerMs, cap })`** — the pure FLIP invert step: for each
+  item that moved, the offset it must start from, staggered in new reading order (y, then x).
+  New and unmoved items are omitted; past `cap` the rest snap.
+- **`<Reorder itemKeys spring staggerMs? cap? testID?>{(key) => node}</Reorder>`** — plays that
+  step on a keyed list when its order changes (`onLayout` slots, `Animated.ValueXY` spring to 0,
+  mid-flight items start from where they visually are). No animation under reduced motion.
+- **`useFocusLift(focused, spring, { scale?, lift? })`** + pure **`focusLiftTarget`** — a focused
+  tile lifts 8px and scales 1.06 on a retargetable spring; stays put under reduced motion.
+
 ## 1.0.2
 
 ### Fixed
