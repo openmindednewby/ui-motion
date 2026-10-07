@@ -118,3 +118,11 @@ verified in the app E2E suites.
 ## License
 
 MIT © dloizides
+
+## HairlineFigure (`@dloizides/ui-motion/hairline`)
+
+Wraps `@lucasmarkes/hairline@0.3.0` (exact pin) so apps never import it directly. Props: `figure` (`HairlineFigureName`), `colors` (a `ModeColors` from `@dloizides/design-tokens`, mapped onto `--hairline-*` by `hairlineVars`), `intensity` (0-1), `label` (translated), `testID`.
+
+- Web (RN-web, `browser` condition): mounts the vanilla API on the View's DOM node; destroyed on unmount.
+- Native (`react-native` condition): renders the upstream bundle inlined as HTML in `react-native-webview` (optional peer; install it to use this subpath on iOS/Android). One figure per screen.
+- A figure is decoration: never put information a user needs in it. On touch-first screens prefer horizontal/area figures (`terrain`, `riffle`, `keyboard`, `router`, `rail`, `dish`, `turntable`, `plot`).

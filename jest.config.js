@@ -14,6 +14,8 @@ module.exports = {
     '!src/**/*.d.ts',
     '!src/index.ts',
     '!src/**/index.ts',
+    '!src/**/index.*.ts',
+    '!src/hairline/data/hairlineBundle.ts',
   ],
   coverageReporters: ['text', 'lcov', 'html'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],

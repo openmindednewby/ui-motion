@@ -48,6 +48,28 @@
                 "types": "./dist/index.d.ts",
                 "default": "./dist/index.js"
             }
+        },
+        "./hairline": {
+            "react-native": {
+                "types": "./dist/hairline/native.d.ts",
+                "default": "./dist/hairline/native.js"
+            },
+            "browser": {
+                "types": "./dist/hairline/web.d.ts",
+                "default": "./dist/hairline/web.js"
+            },
+            "require": {
+                "types": "./dist/hairline/web.d.ts",
+                "default": "./dist/hairline/web.js"
+            },
+            "import": {
+                "types": "./dist/hairline/web.d.mts",
+                "default": "./dist/hairline/web.mjs"
+            },
+            "default": {
+                "types": "./dist/hairline/web.d.ts",
+                "default": "./dist/hairline/web.js"
+            }
         }
     },
     "files": [
@@ -60,7 +82,7 @@
         "node": ">=18.0.0"
     },
     "scripts": {
-        "build": "rimraf dist && tsup",
+        "build": "rimraf dist && npm run generate:hairline && tsup",
         "build:watch": "tsup --watch",
         "test": "jest",
         "test:watch": "jest --watch",
@@ -71,19 +93,22 @@
         "clean": "rimraf dist",
         "security:audit": "npm audit --audit-level=high",
         "deps:outdated": "npm outdated || exit 0",
-        "deps:unused": "npx depcheck --ignores \"@types/jest,@types/node,@types/react,@types/react-dom,rimraf,react-native\"",
+        "deps:unused": "npx depcheck --ignores \"@types/jest,@types/node,@types/react,@types/react-dom,rimraf,react-native,react-native-webview\"",
         "deps:licenses": "npx license-checker --onlyAllow \"MIT;Apache-2.0;ISC;BSD-2-Clause;BSD-3-Clause;0BSD;Unlicense;CC0-1.0\"",
         "deps:health": "npm run deps:outdated && npm run deps:unused",
         "prepublishOnly": "npm run clean && npm run build && npm run test",
-        "version": "npm run build"
+        "version": "npm run build",
+        "generate:hairline": "node scripts/generate-hairline-bundle.mjs"
     },
     "dependencies": {
         "@dloizides/design-tokens": "^1.7.0",
-        "@dloizides/rn-web-hooks": "^1.1.0"
+        "@dloizides/rn-web-hooks": "^1.1.0",
+        "@lucasmarkes/hairline": "0.3.0"
     },
     "peerDependencies": {
         "react": ">=18.0.0",
-        "react-native": ">=0.74.0"
+        "react-native": ">=0.74.0",
+        "react-native-webview": ">=13.0.0"
     },
     "devDependencies": {
         "@dloizides/design-tokens": "file:../design-tokens",
@@ -105,9 +130,15 @@
         "react-dom": "^19.2.4",
         "react-native": "0.81.5",
         "react-native-web": "^0.21.0",
+        "react-native-webview": "^13.15.0",
         "rimraf": "^5.0.0",
         "ts-jest": "^29.1.0",
         "tsup": "^8.0.0",
         "typescript": "^5.4.0"
+    },
+    "peerDependenciesMeta": {
+        "react-native-webview": {
+            "optional": true
+        }
     }
 }

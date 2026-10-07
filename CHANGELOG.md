@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0
+
+### Added
+- `@dloizides/ui-motion/hairline`: `HairlineFigure` (web: vanilla `@lucasmarkes/hairline@0.3.0` on the host DOM node; native: inlined bundle in `react-native-webview`, optional peer), `HairlineFigureName`, `hairlineVars` token mapping (HAIRLINE-1 "Adopt hairline isometric line figures").
+
 ## 1.1.0
 
 ### Added

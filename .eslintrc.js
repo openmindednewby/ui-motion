@@ -31,5 +31,5 @@ module.exports = {
     'no-console': 'error',
     'eqeqeq': ['error', 'always'],
   },
-  ignorePatterns: ['dist/', 'node_modules/', '*.js', '**/*.test.ts', '**/*.test.tsx'],
+  ignorePatterns: ['dist/', 'src/hairline/data/hairlineBundle.ts', 'node_modules/', '*.js', '**/*.test.ts', '**/*.test.tsx'],
 };
