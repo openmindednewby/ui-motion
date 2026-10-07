@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.1
+
+### Fixed
+- Hairline bundle generator now really escapes `</` (was a no-op) and fails the build if `</` or `<!--` survive.
+- `HairlineVarName` is a `const enum` (own file) instead of a string union.
+- Native `HairlineFigure`: exposed as an image only when a non-empty `label` is passed; `intensity` / `label` changes call the mounted figure's `update()` instead of reloading the WebView.
+
 ## 1.2.0
 
 ### Added

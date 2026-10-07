@@ -2,8 +2,8 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  roots: ['<rootDir>/src'],
-  testMatch: ['**/*.test.ts', '**/*.test.tsx'],
+  roots: ['<rootDir>/src', '<rootDir>/scripts'],
+  testMatch: ['**/*.test.ts', '**/*.test.tsx', '**/*.test.cjs'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
     '^react-native$': 'react-native-web',
@@ -18,7 +18,7 @@ module.exports = {
     '!src/hairline/data/hairlineBundle.ts',
   ],
   coverageReporters: ['text', 'lcov', 'html'],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'cjs', 'json'],
   transform: {
     '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },

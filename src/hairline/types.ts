@@ -1,6 +1,7 @@
 import type { ModeColors } from '@dloizides/design-tokens';
 
 import type { HairlineFigureName } from './HairlineFigureName';
+import type { HairlineVarName } from './HairlineVarName';
 
 export interface HairlineFigureProps {
   /** Which upstream figure to draw. */
@@ -13,12 +14,5 @@ export interface HairlineFigureProps {
   label?: string;
   testID?: string;
 }
-
-export type HairlineVarName =
-  | '--hairline-plate'
-  | '--hairline-hi'
-  | '--hairline-edge'
-  | '--hairline-mid'
-  | '--hairline-lo';
 
 export type HairlineVars = Record<HairlineVarName, string>;

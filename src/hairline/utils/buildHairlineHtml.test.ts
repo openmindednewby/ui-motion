@@ -1,6 +1,9 @@
 import { EREVNA_TOKENS } from '@dloizides/design-tokens';
 
-import { buildHairlineHtml } from './buildHairlineHtml';
+import { HAIRLINE_HANDLE_GLOBAL } from '../constants';
+import { HAIRLINE_BUNDLE } from '../data/hairlineBundle';
+
+import { buildHairlineHtml, buildHairlineUpdateScript } from './buildHairlineHtml';
 import { hairlineVars } from './hairlineVars';
 
 const vars = hairlineVars(EREVNA_TOKENS.dark);
@@ -39,5 +42,39 @@ describe('buildHairlineHtml', () => {
     const html = buildHairlineHtml(input);
 
     expect(html).toContain('--hairline-hi:redbodyx;');
+  });
+
+  it('with the generated upstream bundle, contains exactly one script close and no comment opener', () => {
+    const input = { bundle: HAIRLINE_BUNDLE, figure: 'vault', vars, intensity: 0.5 };
+
+    const html = buildHairlineHtml(input);
+
+    expect([html.match(/<\/script/gi)?.length, html.includes('<!--')]).toEqual([1, false]);
+  });
+
+  it('with a mounted figure, keeps its handle on the window so later updates can reach it', () => {
+    const input = { bundle: BUNDLE, figure: 'vault', vars, intensity: 0.5 };
+
+    const html = buildHairlineHtml(input);
+
+    expect(html).toContain(`window["${HAIRLINE_HANDLE_GLOBAL}"]=mount(`);
+  });
+});
+
+describe('buildHairlineUpdateScript', () => {
+  it('with a new intensity and label, calls update on the stored handle with both', () => {
+    const options = { intensity: 0.9, label: 'A vault door' };
+
+    const script = buildHairlineUpdateScript(options);
+
+    expect(script).toContain('h.update({"intensity":0.9,"label":"A vault door"})');
+  });
+
+  it('with a label containing a closing script tag, escapes the angle bracket', () => {
+    const options = { intensity: 0.5, label: '</script>' };
+
+    const script = buildHairlineUpdateScript(options);
+
+    expect(script).not.toContain('</script>');
   });
 });
