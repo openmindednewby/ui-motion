@@ -70,6 +70,18 @@
                 "types": "./dist/hairline/web.d.ts",
                 "default": "./dist/hairline/web.js"
             }
+        },
+        "./logo": {
+            "types": "./dist/logo/index.d.ts",
+            "import": {
+                "types": "./dist/logo/index.d.mts",
+                "default": "./dist/logo/index.mjs"
+            },
+            "require": {
+                "types": "./dist/logo/index.d.ts",
+                "default": "./dist/logo/index.js"
+            },
+            "default": "./dist/logo/index.js"
         }
     },
     "files": [
@@ -137,6 +149,12 @@
         "typescript": "^5.4.0"
     },
     "peerDependenciesMeta": {
+        "react": {
+            "optional": true
+        },
+        "react-native": {
+            "optional": true
+        },
         "react-native-webview": {
             "optional": true
         }

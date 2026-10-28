@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.0
+
+### Added
+- `@dloizides/ui-motion/logo`: framework-free logo player (LOGO-1 "A logo pipeline that makes beautiful, animatable marks"). `playLogo(svg, timeline, { reducedMotion?, iterations? })` plays `data-motion-layer` beats via the Web Animations API with design-token durations/easings; reduced motion applies the final frame at once. `bindMicro(svg, timeline, hover|focus|loading)` binds micro-animations. No React in its import graph.
+
+### Changed
+- `react` and `react-native` peers are optional, so a non-React app can install the package for `/logo`.
+
 ## 1.2.1
 
 ### Fixed

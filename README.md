@@ -126,3 +126,23 @@ Wraps `@lucasmarkes/hairline@0.3.0` (exact pin) so apps never import it directly
 - Web (RN-web, `browser` condition): mounts the vanilla API on the View's DOM node; destroyed on unmount.
 - Native (`react-native` condition): renders the upstream bundle inlined as HTML in `react-native-webview` (optional peer; install it to use this subpath on iOS/Android). One figure per screen.
 - A figure is decoration: never put information a user needs in it. On touch-first screens prefer horizontal/area figures (`terrain`, `riffle`, `keyboard`, `router`, `rail`, `dish`, `turntable`, `plot`).
+
+## Logo player (`@dloizides/ui-motion/logo`)
+
+Framework-free (no React in its import graph; only `@dloizides/design-tokens`), for plain HTML pages and vanilla Vite apps. The mark is drawn elsewhere; name its parts with `data-motion-layer="<name>"`.
+
+```ts
+import { playLogo, bindMicro, type LogoTimeline } from '@dloizides/ui-motion/logo';
+
+const intro: LogoTimeline = [
+  { layer: 'sheet', keyframes: [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], duration: 'slow', easing: 'decelerate' },
+  { layer: 'fold', keyframes: [{ opacity: 0 }, { opacity: 1 }], duration: 'base', delay: 160 },
+];
+const { finished, cancel } = playLogo(svg, intro);
+const unbind = bindMicro(svg, pulse, 'hover');
+```
+
+- `playLogo(svg, timeline, { reducedMotion?, iterations? }) => { finished, cancel }`: one WAAPI animation per matching layer, `fill: 'both'`; `finished` resolves on completion or cancel.
+- Beat: `{ layer, keyframes, duration: 'instant'|'fast'|'base'|'slow'|ms, easing?: 'standard'|'decelerate'|'accelerate', delay?: ms }`, resolved from `DEFAULT_MOTION`.
+- Reduced motion (option, else `prefers-reduced-motion`) or no WAAPI: the last keyframe is applied at once, no animation.
+- `bindMicro(svg, timeline, 'hover'|'focus'|'loading', { reducedMotion? }) => unbind`: hover = pointerenter/leave, focus = focusin/out, loading = loops until unbind; nothing under reduced motion.

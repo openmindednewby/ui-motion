@@ -5,6 +5,7 @@ export default defineConfig({
     index: 'src/index.ts',
     'hairline/web': 'src/hairline/index.web.ts',
     'hairline/native': 'src/hairline/index.native.ts',
+    'logo/index': 'src/logo/index.ts',
   },
   format: ['cjs', 'esm'],
   dts: true,
