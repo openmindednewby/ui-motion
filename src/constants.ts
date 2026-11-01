@@ -31,3 +31,6 @@ export const DEFAULT_FLIP_STAGGER_MS = 18;
 
 /** Default maximum number of items {@link Reorder} animates; the rest snap. */
 export const DEFAULT_FLIP_CAP = 8;
+
+/** Default share of the total each item of {@link useSequence} spends animating. */
+export const DEFAULT_SEQUENCE_ITEM_FRACTION = 0.25;

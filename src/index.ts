@@ -39,6 +39,7 @@ export {
   DEFAULT_FOCUS_LIFT_PX,
   DEFAULT_FLIP_STAGGER_MS,
   DEFAULT_FLIP_CAP,
+  DEFAULT_SEQUENCE_ITEM_FRACTION,
 } from './constants';
 
 // Hooks.
@@ -52,6 +53,9 @@ export type {
   FocusLiftTarget,
   UseFocusLiftResult,
 } from './hooks/useFocusLift';
+
+export { useSequence, sequenceItemRange } from './useSequence';
+export type { SequenceItemRange, UseSequenceOptions, UseSequenceResult } from './useSequence';
 
 // FLIP reorder (pure invert step + the component that plays it).
 export { computeFlipDeltas } from './flip/computeFlipDeltas';

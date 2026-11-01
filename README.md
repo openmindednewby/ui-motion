@@ -56,6 +56,14 @@ Springs a tile to `scale` (default 1.06) and `-lift` px (default 8) while `focus
 otherwise. A focus change retargets the running spring. Reduced motion: no movement (signal focus
 with a ring/shadow instead). Spread `style` onto an `Animated.View`. Pure target: `focusLiftTarget`.
 
+### `useSequence(items, { totalMs, itemMs?, playKey?, playOnMount? })`
+
+Staggers along any ordered list inside a fixed total: the last item ends at `totalMs` however long
+the list is. `progressAt(index)` is a 0-1 animated value for that item, built on demand. A new
+`playKey` replays from the first item; `playOnMount: false` starts final and waits for one. Reduced
+motion: every item is final at once. Input is never blocked: no interaction handle, nothing to await.
+Pure timing: `sequenceItemRange`.
+
 ## Components
 
 ### `<FadeIn duration? delay? translateY? style? testID>`

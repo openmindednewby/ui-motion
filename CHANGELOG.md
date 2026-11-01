@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.0
+
+### Added
+- `useSequence(items, options)`: stagger along any ordered list with a fixed total duration (AC-42 in BEAD-1 "Bead pattern app"). Reduced motion shows the final state at once; the animation registers no interaction handle, so input is never blocked. Pure timing helper `sequenceItemRange`.
+
 ## 1.3.0
 
 ### Added
