@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0
+
+### Added
+- `ScreenTransition`: slides content in by one window width when `transitionKey` changes (D-BEAD-27 in BEAD-1 "Bead pattern app"). `duration` and `easing` are options, defaulting to the `slow` duration and the `decelerate` curve. Reduced motion cuts straight to the content. Router-agnostic: pass the pathname as the key.
+
 ## 1.4.0
 
 ### Added

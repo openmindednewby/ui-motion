@@ -76,3 +76,6 @@ export type { SkeletonProps } from './Skeleton/Skeleton';
 
 export { Reorder } from './flip/Reorder';
 export type { ReorderProps } from './flip/Reorder';
+
+export { ScreenTransition } from './ScreenTransition/ScreenTransition';
+export type { ScreenTransitionProps } from './ScreenTransition/ScreenTransition';

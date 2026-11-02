@@ -9,6 +9,7 @@ export const MOTION_TEST_IDS = {
   pressableScale: 'pressable-scale',
   skeleton: 'skeleton',
   reorder: 'reorder',
+  screenTransition: 'screen-transition',
 } as const;
 
 /** Default press-in scale for {@link PressableScale}. */

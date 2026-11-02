@@ -66,6 +66,18 @@ Pure timing: `sequenceItemRange`.
 
 ## Components
 
+### `<ScreenTransition transitionKey duration? easing? testID?>`
+
+Slides its children in from the right by one window width when `transitionKey` changes; the first
+render does not animate. Defaults: `motionDurations.slow`, `motionEasings.decelerate`. Reduced motion
+cuts straight to the content. Router-agnostic: pass the pathname as the key.
+
+```tsx
+<ScreenTransition transitionKey={usePathname()}>
+  <Stack screenOptions={{ animation: 'none' }} />
+</ScreenTransition>
+```
+
 ### `<FadeIn duration? delay? translateY? style? testID>`
 
 Fades (and slightly lifts) its children in once, on mount.
