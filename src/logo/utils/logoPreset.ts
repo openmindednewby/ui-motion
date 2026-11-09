@@ -14,7 +14,6 @@ const PRESETS = new Map<string, LogoPresetCuts>([
   [LogoPresetName.Fold, fold],
 ]);
 
-/** Every preset name, default first. */
 export const LOGO_PRESET_NAMES: readonly LogoPresetName[] = [
   LogoPresetName.LineDraw,
   LogoPresetName.DaySweep,

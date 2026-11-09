@@ -51,7 +51,6 @@ const catchLight = (layer: LogoLayer, index: number): LogoBeat => ({
 const microCatch = (layer: LogoLayer, index: number): LogoBeat =>
   pulseBeat(layer, { fill: ACCENT_COLOUR }, { duration: MICRO_PART_MS, delay: (index + 1) * MICRO_PART_STAGGER_MS });
 
-/** A day line crosses the emblem and each part catches the accent as it is reached. */
 export const daySweep: LogoPresetCuts = {
   intro: [sweep, ghost, ...PART_LAYERS.map(catchLight)],
   micro: [

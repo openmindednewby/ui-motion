@@ -51,7 +51,6 @@ const inkDip = (layer: LogoLayer, index: number): LogoBeat =>
     required: isNeeded(layer),
   });
 
-/** Outlines trace themselves, then ink floods each shape until it is solid. */
 export const lineDraw: LogoPresetCuts = {
   intro: [...LAYERS.map(trace), ...LAYERS.map(flood)],
   micro: LAYERS.map(inkDip),
