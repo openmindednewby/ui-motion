@@ -6,7 +6,8 @@ const ignoreCancel = (): undefined => undefined;
 
 /** Plays a logo timeline on the mark's `data-motion-layer` nodes via the Web Animations API. */
 export function playLogo(svg: Element, timeline: LogoTimeline, options: PlayLogoOptions = {}): LogoPlayback {
-  const still = options.reducedMotion ?? prefersReducedMotion();
+  const isMissingRequiredLayer = timeline.some((beat) => beat.required === true && findLayers(svg, beat.layer).length === 0);
+  const still = isMissingRequiredLayer || (options.reducedMotion ?? prefersReducedMotion());
   const animations: Animation[] = [];
   timeline.forEach((beat) => {
     findLayers(svg, beat.layer).forEach((element) => {

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- `logoPreset(name?, { cut })` on `@dloizides/ui-motion/logo` (D-LA-1 "Presets any logo can use" in LOGO-ANIM-1 "Shared configurable logo animation"): `line-draw` (default), `day-sweep`, `orbit-lock`, `fold`, each with intro, sting and micro cuts, on the documented layers `emblem`, `part-1..3`, `ghost`.
+- `LogoBeat.required`: a beat whose layer the mark lacks makes `playLogo` show the still. `playLogo`'s signature is unchanged.
+
 ## 1.5.0
 
 ### Added

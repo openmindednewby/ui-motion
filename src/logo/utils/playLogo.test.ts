@@ -38,6 +38,20 @@ describe('playLogo', () => {
     expect(animate).toHaveBeenCalledTimes(1);
   });
 
+  it('with a required layer missing, starts 0 animations and applies the final frames', () => {
+    const { animate } = installFakeAnimate();
+    const svg = makeSvg(MARK);
+    const timeline: LogoTimeline = [
+      { layer: 'stem', keyframes: [{ opacity: 0 }, { opacity: 0.8 }], duration: 'base' },
+      { layer: 'missing', keyframes: [{ opacity: 0 }, { opacity: 1 }], duration: 'base', required: true },
+    ];
+
+    playLogo(svg, timeline, { reducedMotion: false });
+
+    expect(animate).not.toHaveBeenCalled();
+    expect((svg.querySelector('[data-motion-layer="stem"]') as SVGElement).style.opacity).toBe('0.8');
+  });
+
   it('with every animation finished, resolves finished', async () => {
     const { animations } = installFakeAnimate();
     const timeline: LogoTimeline = [{ layer: 'stem', keyframes: [{ opacity: 0 }, { opacity: 1 }], duration: 'base' }];

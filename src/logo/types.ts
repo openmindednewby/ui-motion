@@ -1,5 +1,7 @@
 import type { MotionDurations, MotionEasings } from '@dloizides/design-tokens';
 
+import type { LogoCut } from './LogoCut';
+
 export type LogoDurationToken = keyof MotionDurations;
 
 export type LogoEasingToken = keyof MotionEasings;
@@ -11,6 +13,7 @@ export interface LogoBeat {
   duration: LogoDurationToken | number;
   easing?: LogoEasingToken;
   delay?: number;
+  required?: boolean;
 }
 
 export type LogoTimeline = readonly LogoBeat[];
@@ -26,3 +29,12 @@ export interface LogoPlayback {
 }
 
 export type BindMicroOptions = Pick<PlayLogoOptions, 'reducedMotion'>;
+
+export interface LogoPresetCuts {
+  intro: LogoTimeline;
+  micro: LogoTimeline;
+}
+
+export interface LogoPresetOptions {
+  cut?: LogoCut | `${LogoCut}`;
+}

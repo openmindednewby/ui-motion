@@ -166,3 +166,27 @@ const unbind = bindMicro(svg, pulse, 'hover');
 - Beat: `{ layer, keyframes, duration: 'instant'|'fast'|'base'|'slow'|ms, easing?: 'standard'|'decelerate'|'accelerate', delay?: ms }`, resolved from `DEFAULT_MOTION`.
 - Reduced motion (option, else `prefers-reduced-motion`) or no WAAPI: the last keyframe is applied at once, no animation.
 - `bindMicro(svg, timeline, 'hover'|'focus'|'loading', { reducedMotion? }) => unbind`: hover = pointerenter/leave, focus = focusin/out, loading = loops until unbind; nothing under reduced motion.
+- Beat `required: true`: if the mark has no node for that layer, `playLogo` applies the final frames and starts no animation.
+
+### Presets
+
+```ts
+import { bindMicro, logoPreset, playLogo } from '@dloizides/ui-motion/logo';
+
+playLogo(svg, logoPreset(config.logoAnimation));
+bindMicro(svg, logoPreset(config.logoAnimation, { cut: 'micro' }), 'hover');
+```
+
+`logoPreset(name?, { cut? })` returns a `LogoTimeline`. Names: `line-draw` (default), `day-sweep`, `orbit-lock`, `fold` (`LOGO_PRESET_NAMES`); an unknown name returns the default. Cuts: `intro` (default, up to 1.2 s), `sting` (3.6 s: 300 ms hold, the intro stretched, 500 ms hold), `micro` (up to 300 ms, starts and ends on the still). No preset animates CSS `d`.
+
+| `data-motion-layer` | Role | Needed by |
+|---|---|---|
+| `emblem` | Main shape | `line-draw`, `day-sweep`, `orbit-lock` |
+| `part-1`, `part-2`, `part-3` | Secondary shapes; several nodes may share a name | `fold` |
+| `ghost` | Dim copy behind the emblem, absent from the still (author it with `opacity="0"`) | none |
+
+A mark missing a needed layer shows its still. The mark's own markup supplies the rest:
+
+- `line-draw`: filled shapes with `pathLength="1"` and no stroke in the still.
+- `orbit-lock`, `fold`: CSS `transform-box: view-box` and `transform-origin` on each layer: the orbit centre for `emblem`, the point the parts meet for `part-*`.
+- Optional CSS variables: `--logo-line`, `--logo-line-width` (viewBox units, default `1.5px`), `--logo-accent`; colours fall back to `currentColor`.
